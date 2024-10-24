@@ -2,20 +2,25 @@ package adapter2;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
 
 import domain.Covid19Pacient;
+import domain.Symptom;
 
 
-public class ShowPacientTableGUI extends JFrame{
+public class ShowPacientTableGUI extends JFrame /*implements Observer*/{
 	
 	JTable table;
 	Covid19Pacient pacient;
 	
   
   public ShowPacientTableGUI(Covid19Pacient pacient ) {
+	  
 	  	this.setTitle("Covid Symptoms "+pacient.getName());
 	  	
 	  	this.pacient=pacient;
@@ -32,6 +37,10 @@ public class ShowPacientTableGUI extends JFrame{
 	    
 	  
   }
+  
+	//public void update(Observable o, Object args) {
+		
+	//}
 
   private static void setFonts() {
     Font font = new Font("Dialog", Font.PLAIN, 18);
