@@ -39,7 +39,7 @@ public class Covid19PacientTableModelAdapter extends AbstractTableModel implemen
 			  return (Object) s.getName();
 		  }
 		  else {
-			  return pacient.getWeight( (Symptom) Symptom);
+			  return pacient.getWeight((Symptom) Symptom);
 		  }
 	  }
 	}
