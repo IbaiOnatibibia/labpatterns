@@ -1,5 +1,6 @@
 package iterator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -9,12 +10,13 @@ import domain.Symptom;
 
 public class Covid19PacientAdapter implements InvertedIterator{
 	Covid19Pacient pacient; 
-	List<Symptom> symptoms = new Vector<Symptom>();
-	int posizioa = symptoms.size() - 1;
+	List<Symptom> symptoms;
+	int posizioa;
 
 	public Covid19PacientAdapter(Covid19Pacient pacient) {
 		this.pacient = pacient;
-		this.symptoms = (List<Symptom>) pacient.getSymptoms();
+		this.symptoms = new ArrayList<Symptom>(pacient.getSymptoms());
+		this.posizioa = symptoms.size() - 1;
 	}
 	
 	public Object previous() {
@@ -24,7 +26,7 @@ public class Covid19PacientAdapter implements InvertedIterator{
 	}
 
 	public boolean hasPrevious() {
-		return posizioa > 0;
+		return posizioa >= 0;
 	}
 
 	public void goLast() {

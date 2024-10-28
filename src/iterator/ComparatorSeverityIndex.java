@@ -4,16 +4,18 @@ import java.util.Comparator;
 
 import domain.Symptom;
 
-public class ComparatorSeverityIndex implements Comparator<Symptom> {
-	
-	Symptom s;
+public class ComparatorSeverityIndex implements Comparator<Object> {
+	Object o;
 	
 	@Override
-    public int compare(Symptom s1, Symptom s2){
-        return s1.getSeverityIndex() -  s2.getSeverityIndex();
+    public int compare(Object o1, Object o2){
+		Symptom s1 = (Symptom) o1;
+		Symptom s2 = (Symptom) o2;
+		
+        return s1.getSeverityIndex() - s2.getSeverityIndex();
     }
-	
-	@Override
+
+	/*@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -22,6 +24,8 @@ public class ComparatorSeverityIndex implements Comparator<Symptom> {
 		if (getClass() != obj.getClass())
 			return false;
 		Symptom other = (Symptom) obj;
-		return this.s.getSeverityIndex() == other.getSeverityIndex();
-	}
+		Symptom s = (Symptom) this.o;
+		
+		return s.getSeverityIndex() == other.getSeverityIndex();
+	}*/
 }
