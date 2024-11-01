@@ -1,7 +1,9 @@
 package factory;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import domain.DigestiveSymptom;
 import domain.NeuroMuscularSymptom;
@@ -9,8 +11,18 @@ import domain.RespiratorySymptom;
 import domain.Symptom;
 
 public class SymptomFactory {
-
+    private Map<String, Symptom> symptomMap;
+    
+	public SymptomFactory() {
+		symptomMap = new HashMap<>();
+	}
+    
 	public Symptom createSymptom(String symptomName) {
+		
+        if (symptomMap.containsKey(symptomName)) {
+            return symptomMap.get(symptomName);
+        }
+        
 	    List<String> impact5 = Arrays.asList("fiebre", "tos seca", "astenia","expectoracion");
 	    List<Double> index5 = Arrays.asList(87.9, 67.7, 38.1, 33.4);
 	    List<String> impact3 = Arrays.asList("disnea", "dolor de garganta", "cefalea","mialgia","escalofrios");
@@ -29,12 +41,18 @@ public class SymptomFactory {
 	      else if (impact3.contains(symptomName)) {impact=3;index= index3.get(impact3.indexOf(symptomName));}
 	        else if (impact1.contains(symptomName)) {impact=1; index= index1.get(impact1.indexOf(symptomName));}
 	 
+        Symptom symptom = null;
 	    if (impact!=0)  {
-	    	if (digestiveSymptom.contains(symptomName)) return new DigestiveSymptom(symptomName,(int)index, impact);
-	    	if (neuroMuscularSymptom.contains(symptomName)) return new NeuroMuscularSymptom(symptomName,(int)index, impact);
-	    	if (respiratorySymptom.contains(symptomName)) return new RespiratorySymptom(symptomName,(int)index, impact);
+	    	if (digestiveSymptom.contains(symptomName)) symptom = new DigestiveSymptom(symptomName,(int)index, impact);
+	    	if (neuroMuscularSymptom.contains(symptomName)) symptom = new NeuroMuscularSymptom(symptomName,(int)index, impact);
+	    	if (respiratorySymptom.contains(symptomName)) symptom = new RespiratorySymptom(symptomName,(int)index, impact);
 	    }
-	    return null;		
+	    
+	    if (symptom != null) {
+            symptomMap.put(symptomName, symptom);
+        }
+	    
+	    return symptom;		
 		
 	}
 }
